@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Directory</string>
+
+
+    <string name="dummy_content">Welcome to Directory</string>
+    <string name="content">Get connected with your community.\nWhat are you waiting for?</string>
+
+    <string name="title_activity_directory_class">directoryClass</string>
+    <string name="dummy_button">Dummy Button</string>
+</resources>
