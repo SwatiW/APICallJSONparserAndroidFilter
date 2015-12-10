@@ -8,12 +8,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,13 +48,13 @@ public class DirectoryClass extends AppCompatActivity {
 
     private class CallAPI extends AsyncTask<Void,Void,String> {
         ProgressBar progressBar=(ProgressBar)findViewById(R.id.progressBar);
-        TextView responseView=(TextView)findViewById(R.id.responseView);
+        //TextView responseView=(TextView)findViewById(R.id.responseView);
 
         private Exception exception;
 
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
-            responseView.setText("");
+        //    responseView.setText("");
         }
 
         protected String doInBackground(Void... urls) {
@@ -82,7 +85,32 @@ public class DirectoryClass extends AppCompatActivity {
             }
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
-            responseView.setText(response);
+         //   responseView.setText(response);
+            try {
+                ListView list=(ListView)findViewById(R.id.list);
+                ArrayList<String> listitem = new ArrayList<String>();
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(DirectoryClass.this, android.R.layout.simple_list_item_1,listitem);
+                list.setAdapter(adapter);
+                JSONArray art=new JSONArray(response);
+
+                String str = "";
+               for(int i=0;i<art.length();i++){
+                   str +=art.getJSONObject(i).getString("Surname")+" "+art.getJSONObject(i).getString("First_Name");
+                   listitem.add(str);
+                   adapter.notifyDataSetChanged();
+                   str="";
+               }
+                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(DirectoryClass.this, "clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 
