@@ -27,7 +27,7 @@
         android:layout_marginTop="80dp"
         android:textColor="#ffffff" />
 
-
+<!--Initial login and register Buttons-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,6 +47,8 @@
             android:layout_gravity="center"
             android:layout_marginBottom="20dp" />
 
+    <!--EditText to enter mobile no for login if login Button is clicked, initially hidden-->
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +60,7 @@
         android:visibility="invisible"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff" />
-
+<!--Initially hidden ,used for login-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -30,6 +30,7 @@ public class ExtendInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extend_info);
 
+        // initialising the TextViews
         TextView first, mid, surname, address1, address2, city, house, mobile, blood, birth;
         first = (TextView) findViewById(R.id.first);
         mid = (TextView) findViewById(R.id.middle);
@@ -43,12 +44,14 @@ public class ExtendInfo extends AppCompatActivity {
         blood = (TextView) findViewById(R.id.blood);
 
 
-        // getting api data
+        // getting JSON data through Intent from DirectoryClass
         Bundle getData = getIntent().getExtras();
         String response = getData.getString("response");
         long item = getData.getLong("item");
 
         String imageurl = null;
+
+        // getting JSON objects and setting them to TextView
         try {
             JSONArray array = new JSONArray(response);
             first.setText(array.getJSONObject((int) item).getString("First_Name"));
@@ -67,10 +70,13 @@ public class ExtendInfo extends AppCompatActivity {
             e.printStackTrace();
         }
         img = (ImageView) findViewById(R.id.imageView);
+
+        //call to load the proficpic
         new LoadImage().execute(imageurl);
 
     }
 
+    // class to load the profic pic from url specified in json and setting to ImageView
     private class LoadImage extends AsyncTask<String, String, Bitmap> {
         ProgressBar progresBar=(ProgressBar)findViewById(R.id.progresBar);
         @Override
@@ -89,6 +95,7 @@ public class ExtendInfo extends AppCompatActivity {
             return bitmap;
         }
 
+        // setting the profic_Pic to ImageView
         protected void onPostExecute(Bitmap image) {
             progresBar.setVisibility(View.GONE);
             if(image != null){

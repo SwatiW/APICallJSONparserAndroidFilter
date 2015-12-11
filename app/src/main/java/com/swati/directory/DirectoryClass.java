@@ -50,7 +50,7 @@ public class DirectoryClass extends AppCompatActivity {
 
     }
 
-    // Call to the Api
+    // Call to the Api to get directory data
     private class CallAPI extends AsyncTask<Void,Void,String> {
         ProgressBar progressBar=(ProgressBar)findViewById(R.id.progressBar);
         //TextView responseView=(TextView)findViewById(R.id.responseView);
@@ -94,7 +94,7 @@ public class DirectoryClass extends AppCompatActivity {
             Log.i("INFO", response);
          //   responseView.setText(response);
             try {
-
+//adding items to listView through ArrayAdapter and getting JSON array and objects from string data
                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DirectoryClass.this, android.R.layout.simple_list_item_1,listitem);
                 list.setAdapter(adapter);
                 JSONArray art=new JSONArray(response);
@@ -108,6 +108,9 @@ public class DirectoryClass extends AppCompatActivity {
                }
                 final String finalResponse = response;
                 final String finalResponse1 = response;
+
+                //setting listener for clicks on list items and sending data with intent to ExtendInfo
+                // for showing persons full details
                 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -121,10 +124,13 @@ public class DirectoryClass extends AppCompatActivity {
                     }
                 });
 
+                //search box
 
                 final EditText editsearch = (EditText) findViewById(R.id.searchData);
                 list.setTextFilterEnabled(true);
-                // Capture Text in EditText
+
+
+                // Capture Text in EditText and filter the list accordingly
                 editsearch.addTextChangedListener(new TextWatcher() {
 
                     public void afterTextChanged(Editable s) {

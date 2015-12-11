@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.swati.directory.DirectoryClass">
 
-
+<!--EditText to be used as search filter-->
         <EditText
             android:id="@+id/searchData"
             android:hint="Enter the person's name here"
@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/search"/>
 
+    <!--to show that process is going on-->
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -26,6 +27,7 @@
             android:visibility="gone"
             android:layout_below="@+id/searchData"/>
 
+    <!--To show list of names from directory-->
          <ListView
              android:id="@+id/list"
              android:layout_width="wrap_content"

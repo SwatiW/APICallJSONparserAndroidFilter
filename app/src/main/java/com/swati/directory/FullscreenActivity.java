@@ -54,6 +54,7 @@ public class FullscreenActivity extends AppCompatActivity {
             }
         });
 
+        //setting click events for login button
         final Button login=(Button)findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -68,6 +69,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 oklogin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                    //checking if internet is present by using ConnectionDetector class
                         cd = new ConnectionDetector(getApplicationContext());
                         isInternetPresent = cd.isConnectingToInternet();
                         if (isInternetPresent) {

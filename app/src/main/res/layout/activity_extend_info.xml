@@ -10,6 +10,8 @@
     android:layout_marginRight="20dp"
     tools:context="com.swati.directory.ExtendInfo">
 
+    <!--TextViews to show full information of the selected person from listView and ImageView to set the Profile pic-->
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"

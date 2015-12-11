@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 
 /**
  * Created by swati on 11/12/15.
+ * Class too check whether device is connected to Internet or not.
+ * If connected , returns true , else false
  */
 public class ConnectionDetector {
 
