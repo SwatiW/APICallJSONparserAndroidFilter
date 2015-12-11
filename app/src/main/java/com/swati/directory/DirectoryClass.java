@@ -1,10 +1,12 @@
 package com.swati.directory;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,23 +35,27 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.logging.Handler;
 
 public class DirectoryClass extends AppCompatActivity {
 
 
-
+    private Handler adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directory_class);
 
         new CallAPI().execute();
+
     }
 
-
+    // Call to the Api
     private class CallAPI extends AsyncTask<Void,Void,String> {
         ProgressBar progressBar=(ProgressBar)findViewById(R.id.progressBar);
         //TextView responseView=(TextView)findViewById(R.id.responseView);
+        ListView list=(ListView)findViewById(R.id.list);
+        ArrayList<String> listitem = new ArrayList<String>();
 
         private Exception exception;
 
@@ -87,9 +94,8 @@ public class DirectoryClass extends AppCompatActivity {
             Log.i("INFO", response);
          //   responseView.setText(response);
             try {
-                ListView list=(ListView)findViewById(R.id.list);
-                ArrayList<String> listitem = new ArrayList<String>();
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(DirectoryClass.this, android.R.layout.simple_list_item_1,listitem);
+
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DirectoryClass.this, android.R.layout.simple_list_item_1,listitem);
                 list.setAdapter(adapter);
                 JSONArray art=new JSONArray(response);
 
@@ -100,19 +106,45 @@ public class DirectoryClass extends AppCompatActivity {
                    adapter.notifyDataSetChanged();
                    str="";
                }
+                final String finalResponse = response;
+                final String finalResponse1 = response;
                 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(DirectoryClass.this, "clicked", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(DirectoryClass.this, "clicked", Toast.LENGTH_SHORT).show();
+                        Intent info = new Intent(DirectoryClass.this, ExtendInfo.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", finalResponse1);
+                        bundle.putLong("item", id);
+                        info.putExtras(bundle);
+                        startActivity(info);
                     }
                 });
 
 
-            } catch (JSONException e) {
+                final EditText editsearch = (EditText) findViewById(R.id.searchData);
+                list.setTextFilterEnabled(true);
+                // Capture Text in EditText
+                editsearch.addTextChangedListener(new TextWatcher() {
+
+                    public void afterTextChanged(Editable s) {
+                    }
+
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        adapter.getFilter().filter(s.toString());
+                    }
+                });
+         } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
+
+
+
 
     }
 }

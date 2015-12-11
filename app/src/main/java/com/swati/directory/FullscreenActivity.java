@@ -17,7 +17,8 @@ import android.widget.Toast;
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenActivity extends AppCompatActivity {
-
+    Boolean isInternetPresent = false;
+    ConnectionDetector cd;
  /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -67,16 +68,22 @@ public class FullscreenActivity extends AppCompatActivity {
                 oklogin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String mobile=mob_no.getText().toString();
-                        if (mobile.equals("80")){
-                            Intent i=new Intent(FullscreenActivity.this,DirectoryClass.class);
-                            startActivity(i);
+                        cd = new ConnectionDetector(getApplicationContext());
+                        isInternetPresent = cd.isConnectingToInternet();
+                        if (isInternetPresent) {
+                            String mobile = mob_no.getText().toString();
+                            if (mobile.equals("80")) {
+                                Intent i = new Intent(FullscreenActivity.this, DirectoryClass.class);
+                                startActivity(i);
+                                finish();
+                            } else {
+                                Toast.makeText(FullscreenActivity.this, "No match found", Toast.LENGTH_SHORT).show();
+                                mob_no.setText("");
+                            }
                         }
-                        else {
-                            Toast.makeText(FullscreenActivity.this, "No match found", Toast.LENGTH_SHORT).show();
-                            mob_no.setText("");
+                        else{
+                            Toast.makeText(FullscreenActivity.this, "No Data Connection", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
             }
