@@ -42,11 +42,10 @@ public class DirectoryClass extends AppCompatActivity {
         ListView list=(ListView)findViewById(R.id.list);
         ArrayList<String> listitem = new ArrayList<>();
 
-      //  private Exception exception;
 
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
-        //    responseView.setText("");
+
         }
 
         protected String doInBackground(Void... urls) {

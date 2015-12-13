@@ -243,8 +243,8 @@ public class FullscreenActivity extends AppCompatActivity {
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                 wr.write(data);
                 wr.flush();
-                //Toast.makeText(MainActivity.this,data, Toast.LENGTH_SHORT).show();
-                // Get the server response
+
+                 // Get the server response
 
                 reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();

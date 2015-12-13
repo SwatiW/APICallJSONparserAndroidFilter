@@ -5,9 +5,7 @@
    android:background="@drawable/rsz_city3"
     tools:context="com.swati.directory.FullscreenActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
+
     <TextView android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,6 +58,7 @@
         android:visibility="invisible"
         android:textColor="#ffffff"
         android:textColorHint="#ffffff" />
+
 <!--Initially hidden ,used for login-->
     <Button
         android:layout_width="wrap_content"

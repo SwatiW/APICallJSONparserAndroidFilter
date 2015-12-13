@@ -19,7 +19,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
          />
-    <!--To show that image is loading-->
+
+    <!--To show that image is loading by establishing connection-->
     <ProgressBar
         android:id="@+id/progresBar"
         android:layout_width="wrap_content"

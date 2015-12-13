@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/search"/>
 
-    <!--to show that process is going on , visible when login is clicked-->
+    <!--to show that process is going on-->
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
