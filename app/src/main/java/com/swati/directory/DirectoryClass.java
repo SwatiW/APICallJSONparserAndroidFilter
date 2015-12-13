@@ -95,7 +95,7 @@ public class DirectoryClass extends AppCompatActivity {
          //   responseView.setText(response);
             try {
 //adding items to listView through ArrayAdapter and getting JSON array and objects from string data
-                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DirectoryClass.this, android.R.layout.simple_list_item_1,listitem);
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DirectoryClass.this,R.layout.list,R.id.listname,listitem);
                 list.setAdapter(adapter);
                 JSONArray art=new JSONArray(response);
 

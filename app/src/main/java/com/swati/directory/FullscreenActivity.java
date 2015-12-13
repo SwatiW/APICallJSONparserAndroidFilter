@@ -1,16 +1,30 @@
 package com.swati.directory;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -39,7 +53,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private View mContentView;
     private boolean mVisible;
-
+    String mobile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +70,12 @@ public class FullscreenActivity extends AppCompatActivity {
 
         //setting click events for login button
         final Button login=(Button)findViewById(R.id.login);
+        final EditText mob_no=(EditText)findViewById(R.id.mobile_no);
+
         login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                 final EditText mob_no=(EditText)findViewById(R.id.mobile_no);
+
                  Button register=(Button)findViewById(R.id.register);
                 register.setVisibility(View.GONE);
                 login.setVisibility(View.GONE);
@@ -73,15 +89,8 @@ public class FullscreenActivity extends AppCompatActivity {
                         cd = new ConnectionDetector(getApplicationContext());
                         isInternetPresent = cd.isConnectingToInternet();
                         if (isInternetPresent) {
-                            String mobile = mob_no.getText().toString();
-                            if (mobile.equals("80")) {
-                                Intent i = new Intent(FullscreenActivity.this, DirectoryClass.class);
-                                startActivity(i);
-                                finish();
-                            } else {
-                                Toast.makeText(FullscreenActivity.this, "No match found", Toast.LENGTH_SHORT).show();
-                                mob_no.setText("");
-                            }
+                            // Using asynctask to prevent network on main thread exception
+                             new PostDataAsyncTask().execute();
                         }
                         else{
                             Toast.makeText(FullscreenActivity.this, "No Data Connection", Toast.LENGTH_SHORT).show();
@@ -200,4 +209,85 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
+    private class PostDataAsyncTask extends AsyncTask<String, String, String>{
+        ProgressBar loginprogress=(ProgressBar)findViewById(R.id.loginprogress);
+        String data ;
+        EditText mobil=(EditText)findViewById(R.id.mobile_no);
+        String mobile=mobil.getText().toString();
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            loginprogress.setVisibility(View.VISIBLE);
+            // do stuff before posting data
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+           // String mobil=
+                data="mobile_no="+mobile;
+            String text = "";
+            BufferedReader reader = null;
+
+            // Send data
+            try {
+
+                // Defined URL  where to send data
+
+                // Send POST data request
+                URL url = new URL("http://thirpur.netii.net/thirpur.php?method=login");
+
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(data);
+                wr.flush();
+                //Toast.makeText(MainActivity.this,data, Toast.LENGTH_SHORT).show();
+                // Get the server response
+
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                // Read Server Response
+                while ((line = reader.readLine()) != null) {
+                    // Append server response in string
+                    sb.append(line + "\n");
+                }
+
+
+                text = sb.toString();
+                return text;
+            }
+            catch(Exception ex)
+            {
+                return (ex.getMessage());
+            }
+
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            loginprogress.setVisibility(View.GONE);
+            String answer;
+            try {
+                JSONObject json=new JSONObject(response);
+                answer=json.getString("success");
+                if (answer.equals("yes")) {
+                    Intent i = new Intent(FullscreenActivity.this, DirectoryClass.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    Toast.makeText(FullscreenActivity.this, "Incorrect Number", Toast.LENGTH_SHORT).show();
+                    EditText mob_no=(EditText)findViewById(R.id.mobile_no);
+                    mob_no.setText("");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
 }

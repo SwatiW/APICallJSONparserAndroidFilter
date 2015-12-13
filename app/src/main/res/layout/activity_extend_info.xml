@@ -23,6 +23,8 @@
         android:id="@+id/progresBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
         android:indeterminate="true"
          android:visibility="gone"
        />
@@ -56,7 +58,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:text="Address 1       : "
         android:id="@+id/textView11"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
@@ -65,7 +67,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Address 1       : "
+
         android:id="@+id/textView4"
         android:layout_below="@+id/textView11"
         android:textColor="#000000" />
@@ -73,16 +75,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:text="Address 2       : "
         android:id="@+id/textView12"
         android:layout_below="@+id/textView4"
-        android:layout_toEndOf="@+id/textView11"
+
         android:textColor="#000000" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Address 2       : "
+
         android:id="@+id/textView5"
         android:layout_below="@+id/textView12"
         android:textColor="#000000" />
@@ -145,22 +147,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/surname"
-        android:layout_above="@+id/textView4"
+        android:layout_above="@+id/textView11"
         android:layout_toEndOf="@+id/textView3"
         android:textColor="#000000" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/address1"
-        android:layout_above="@+id/textView5"
-        android:layout_toEndOf="@+id/textView4"
+        android:layout_above="@+id/textView12"
+        android:layout_toEndOf="@+id/textView11"
         android:textColor="#000000" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/address2"
         android:layout_above="@+id/textView6"
-        android:layout_toEndOf="@+id/textView5"
+        android:layout_toEndOf="@+id/textView11"
         android:textColor="#000000" />
     <TextView
         android:layout_width="wrap_content"
@@ -197,6 +199,7 @@
         android:layout_below="@+id/birthdate"
         android:layout_toEndOf="@+id/textView10"
         android:textColor="#000000" />
+
 
 
 </RelativeLayout>
