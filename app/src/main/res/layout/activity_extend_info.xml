@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
          />
 
-    <!--To show that image is loading by establishing connection-->
+    <!--To show that image is loading by establishing connection, invisible after loading-->
     <ProgressBar
         android:id="@+id/progresBar"
         android:layout_width="wrap_content"

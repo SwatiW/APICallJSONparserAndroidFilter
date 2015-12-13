@@ -143,7 +143,7 @@ public class FullscreenActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-     //   mControlsView.setVisibility(View.GONE);
+
         mVisible = false;
 
         // Schedule a runnable to remove the status and navigation bar after a delay
@@ -225,7 +225,7 @@ public class FullscreenActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-           // String mobil=
+
                 data="mobile_no="+mobile;
             String text = "";
             BufferedReader reader ;

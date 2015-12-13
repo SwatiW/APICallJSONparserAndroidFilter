@@ -68,6 +68,8 @@
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:visibility="invisible" />
+
+    <!--visible when making connection-->
     <ProgressBar
         android:id="@+id/loginprogress"
         android:visibility="gone"

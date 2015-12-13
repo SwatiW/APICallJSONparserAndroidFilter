@@ -90,7 +90,7 @@ public class DirectoryClass extends AppCompatActivity {
                    adapter.notifyDataSetChanged();
                    str="";
                }
-             //   final String finalResponse = response;
+
                 final String finalResponse1 = response;
 
                 //setting listener for clicks on list items and sending data with intent to ExtendInfo

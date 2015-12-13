@@ -84,6 +84,7 @@ public class ExtendInfo extends AppCompatActivity {
             progresBar.setVisibility(View.VISIBLE);
 
         }
+        //returns data to onPostExecute
         protected Bitmap doInBackground(String... args) {
             try {
                 bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
