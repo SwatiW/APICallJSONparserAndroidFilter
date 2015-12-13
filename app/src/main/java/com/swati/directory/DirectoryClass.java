@@ -1,46 +1,31 @@
 package com.swati.directory;
 
-import android.app.ListActivity;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.logging.Handler;
 
 public class DirectoryClass extends AppCompatActivity {
 
 
-    private Handler adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +40,9 @@ public class DirectoryClass extends AppCompatActivity {
         ProgressBar progressBar=(ProgressBar)findViewById(R.id.progressBar);
         //TextView responseView=(TextView)findViewById(R.id.responseView);
         ListView list=(ListView)findViewById(R.id.list);
-        ArrayList<String> listitem = new ArrayList<String>();
+        ArrayList<String> listitem = new ArrayList<>();
 
-        private Exception exception;
+      //  private Exception exception;
 
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
@@ -95,7 +80,7 @@ public class DirectoryClass extends AppCompatActivity {
          //   responseView.setText(response);
             try {
 //adding items to listView through ArrayAdapter and getting JSON array and objects from string data
-                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DirectoryClass.this,R.layout.list,R.id.listname,listitem);
+                final ArrayAdapter<String> adapter = new ArrayAdapter<>(DirectoryClass.this,R.layout.list,R.id.listname,listitem);
                 list.setAdapter(adapter);
                 JSONArray art=new JSONArray(response);
 
@@ -106,7 +91,7 @@ public class DirectoryClass extends AppCompatActivity {
                    adapter.notifyDataSetChanged();
                    str="";
                }
-                final String finalResponse = response;
+             //   final String finalResponse = response;
                 final String finalResponse1 = response;
 
                 //setting listener for clicks on list items and sending data with intent to ExtendInfo

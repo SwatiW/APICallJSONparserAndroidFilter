@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +24,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -228,7 +228,7 @@ public class FullscreenActivity extends AppCompatActivity {
            // String mobil=
                 data="mobile_no="+mobile;
             String text = "";
-            BufferedReader reader = null;
+            BufferedReader reader ;
 
             // Send data
             try {

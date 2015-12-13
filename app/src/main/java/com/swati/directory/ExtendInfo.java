@@ -90,7 +90,7 @@ public class ExtendInfo extends AppCompatActivity {
         }
         img = (ImageView) findViewById(R.id.imageView);
 
-        //call to load the proficpic
+        //call to load the proficpic ; must be done in background thread
         new LoadImage().execute(imageurl);
 
     }
